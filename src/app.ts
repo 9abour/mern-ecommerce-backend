@@ -1,4 +1,4 @@
-import express, {Response, Request} from "express"
+import express, {Response} from "express"
 import dotenv from "dotenv"
 import cors from "cors"
 
@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_, res: Response) => {
     res.send("Hello, World!")
 })
 
