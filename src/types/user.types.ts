@@ -6,7 +6,13 @@ export type IUser = {
   lastName: string;
   email: string;
   image_url: string;
+  password: string;
   wishlist: IProduct[];
   cart: IProduct[];
   role: ROLES;
 };
+
+export type INewUser = Pick<
+  IUser,
+  "firstName" | "lastName" | "email" | "password"
+>;

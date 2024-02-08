@@ -22,6 +22,7 @@ const UserModel = new Schema<IUser>({
     type: String,
     default: ROLES.USER,
   },
+  password: String,
 });
 
 export default model<IUser>("USER", UserModel);

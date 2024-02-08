@@ -16,10 +16,10 @@ const handleExpressValidatorErrors = (
   res: Response,
   next: NextFunction,
 ) => {
-  const errors: string[] = getExpressValidatorErrors(req);
+  const errors: string[] | null = getExpressValidatorErrors(req);
 
   if (errors) {
-    handleSendResponse(res, [], errors, 400, STATUS_TEXT.ERROR);
+    return handleSendResponse(res, null, errors, 400, STATUS_TEXT.ERROR);
   }
 
   next();

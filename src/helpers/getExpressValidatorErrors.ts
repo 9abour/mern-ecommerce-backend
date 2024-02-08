@@ -7,17 +7,15 @@ import { Result, ValidationError, validationResult } from "express-validator";
  * @returns {string[]} An array of error messages.
  */
 
-const getExpressValidatorErrors = (req: Request): string[] => {
+const getExpressValidatorErrors = (req: Request): string[] | null => {
   const validatorErrors: Result<ValidationError> = validationResult(req);
   const errors: string[] = [];
 
   validatorErrors["errors"].map((error: ValidationError) => {
-    console.log(errors);
-
     errors.push(error.msg);
   });
 
-  return errors;
+  return errors.length ? errors : null;
 };
 
 export default getExpressValidatorErrors;

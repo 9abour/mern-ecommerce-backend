@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { NextFunction, Response } from "express";
 import { STATUS_TEXT } from "../enums/statusTexts.enums";
 import { IApiResponse, IErrorMessage } from "../types/handleSendResponse.types";
 
@@ -8,7 +8,8 @@ const handleSendResponse = <Data>(
   errors: IErrorMessage[] | null,
   code: number,
   statusText: STATUS_TEXT,
-): void => {
+  next?: NextFunction,
+) => {
   const response: IApiResponse<Data> = {
     data,
     errors,
@@ -16,7 +17,9 @@ const handleSendResponse = <Data>(
     statusText,
   };
 
-  res.status(code).json(response);
+  if (errors && next) return next(res.status(code).json(response));
+
+  return res.status(code).json(response);
 };
 
 export default handleSendResponse;
