@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { STATUS_TEXT } from "../enums/statusTexts";
+import { STATUS_TEXT } from "../enums/statusTexts.enums";
 import { IApiResponse, IErrorMessage } from "../types/handleSendResponse.types";
 
 const handleSendResponse = <Data>(
