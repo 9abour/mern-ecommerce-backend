@@ -3,7 +3,8 @@ import { IUser } from "../../types/user.types";
 import getUser from "./helpers/getUser";
 import handleSendResponse from "../../helpers/handleSendResponse";
 import { STATUS_TEXT } from "../../enums/statusTexts.enums";
-import saveUser from "./helpers/saveUser";
+import crypto from "crypto";
+import sendVerificationTokenMail from "../../helpers/sendVerificationTokenMail";
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
   const { firstName, lastName, email, password }: IUser = req.body;
@@ -19,11 +20,16 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
       STATUS_TEXT.ERROR,
       next,
     );
+
+    return;
   }
 
-  const newUser = await saveUser({ firstName, lastName, email, password });
+  const verificationToken = crypto.randomBytes(20).toString("hex");
 
-  handleSendResponse(res, { newUser }, null, 201, STATUS_TEXT.SUCCESSFUL);
+  const newUser = {firstName, lastName, email, password, verificationToken}
+
+  await sendVerificationTokenMail(res, newUser, verificationToken, next);
+
 };
 
 export default register;

@@ -10,9 +10,16 @@ export type IUser = {
   wishlist: IProduct[];
   cart: IProduct[];
   role: ROLES;
+  verificationToken?: string;
+  verified?: boolean;
 };
 
 export type INewUser = Pick<
   IUser,
-  "firstName" | "lastName" | "email" | "password"
+  | "firstName"
+  | "lastName"
+  | "email"
+  | "password"
+  | "verificationToken"
+  | "verified"
 >;

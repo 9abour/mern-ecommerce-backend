@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { INewUser } from "../../../types/user.types";
 import UserModel from "../../../models/user.model";
 
-const saveUser = async (user: INewUser): Promise<INewUser> => {
+const saveUser = async (user: INewUser): Promise<void> => {
   const { password } = user;
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -15,8 +15,6 @@ const saveUser = async (user: INewUser): Promise<INewUser> => {
   const newUser = new UserModel(newUserPayload);
 
   await newUser.save();
-
-  return newUser;
 };
 
 export default saveUser;

@@ -23,6 +23,14 @@ const UserModel = new Schema<IUser>({
     default: ROLES.USER,
   },
   password: String,
+  verificationToken: {
+    type: String,
+    required: false,
+  },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export default model<IUser>("USER", UserModel);
