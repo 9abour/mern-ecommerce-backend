@@ -3,7 +3,7 @@ import handleSendResponse from "./handleSendResponse";
 import { STATUS_TEXT } from "../enums/statusTexts.enums";
 import saveUser from "../controllers/auth/helpers/saveUser";
 import { INewUser } from "../types/user.types";
-import nodemailer from "nodemailer";
+import sendMail from "./sendMail";
 
 const sendVerificationTokenMail = async (
 	res: Response,
@@ -14,26 +14,13 @@ const sendVerificationTokenMail = async (
 	const verificationLink = `http://localhost:5000/verify/${verificationToken}`;
 
 	const mailOptions = {
-		from: process.env.TRANSPORTER_EMAIL,
+		from: process.env.TRANSPORTER_EMAIL || "",
 		to: user.email,
 		subject: "Verify Your Email Address",
 		text: `Please click on the following link to verify your email address: ${verificationLink}`,
 	};
 
-	const transport = nodemailer.createTransport({
-		service: "Gmail",
-		auth: {
-			user: process.env.TRANSPORTER_EMAIL,
-			pass: process.env.TRANSPORTER_PASSWORD,
-		},
-	});
-
-	transport.sendMail(mailOptions, async err => {
-		if (err)
-			return next(
-				handleSendResponse(res, null, [err.message], 400, STATUS_TEXT.ERROR)
-			);
-
+	sendMail(mailOptions, res, next, async () => {
 		await saveUser(user);
 		handleSendResponse(
 			res,

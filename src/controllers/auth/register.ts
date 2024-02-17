@@ -7,29 +7,26 @@ import crypto from "crypto";
 import sendVerificationTokenMail from "../../helpers/sendVerificationTokenMail";
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
-  const { firstName, lastName, email, password }: IUser = req.body;
+	const { firstName, lastName, email, password }: IUser = req.body;
 
-  const user = await getUser(email);
+	const user = await getUser(email);
 
-  if (user) {
-    handleSendResponse(
-      res,
-      null,
-      ["the user already exists!"],
-      409,
-      STATUS_TEXT.ERROR,
-      next,
-    );
+	if (user) {
+		return handleSendResponse(
+			res,
+			null,
+			["the user already exists!"],
+			409,
+			STATUS_TEXT.ERROR,
+			next
+		);
+	}
 
-    return;
-  }
+	const verificationToken = crypto.randomBytes(20).toString("hex");
 
-  const verificationToken = crypto.randomBytes(20).toString("hex");
+	const newUser = { firstName, lastName, email, password, verificationToken };
 
-  const newUser = {firstName, lastName, email, password, verificationToken}
-
-  await sendVerificationTokenMail(res, newUser, verificationToken, next);
-
+	await sendVerificationTokenMail(res, newUser, verificationToken, next);
 };
 
 export default register;

@@ -15,14 +15,13 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 	// No User found
 	if (!user) {
-		return next(
-			handleSendResponse(
-				res,
-				null,
-				["The user not exists!"],
-				404,
-				STATUS_TEXT.NOT_FOUND
-			)
+		return handleSendResponse(
+			res,
+			null,
+			["The user not exists!"],
+			404,
+			STATUS_TEXT.NOT_FOUND,
+			next
 		);
 	}
 
@@ -34,7 +33,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 				null,
 				["The password do not match!"],
 				404,
-				STATUS_TEXT.NOT_FOUND
+				STATUS_TEXT.NOT_FOUND,
+				next
 			)
 		)
 	);

@@ -5,7 +5,7 @@ import {
 	registerValidateInput,
 } from "../../validators/auth";
 import asyncWrapper from "../../middlewares/asyncWrapper";
-import verifyAccount from "../../controllers/auth/verifyAccount";
+import verifyAccount from "../../controllers/auth/verify";
 import login from "../../controllers/auth/login";
 
 const authRoutes = Router();
