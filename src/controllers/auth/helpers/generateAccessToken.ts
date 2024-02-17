@@ -1,4 +1,5 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { IUser } from "../../../types/user.types";
 
 const generateAccessToken = (refreshToken: string): string | null => {
 	const secretKey: string = process.env.JWT_SECRET_KEY || "";
@@ -14,7 +15,7 @@ const generateAccessToken = (refreshToken: string): string | null => {
 
 	const user = {
 		email: decoded.email,
-		userImage: decoded.userImage,
+		userImage: decoded.image_url,
 	};
 
 	const accessToken = jwt.sign(user, secretKey, options);

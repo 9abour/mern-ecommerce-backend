@@ -23,13 +23,23 @@ const loginValidateInput = [
 	handleExpressValidatorErrors,
 ];
 
-const resetPasswordValidateInput = [
+const sendResetPasswordValidateInput = [
 	check("email").notEmpty().withMessage("Email is required."),
+	handleExpressValidatorErrors,
+];
+
+const resetPasswordValidateInput = [
+	check("newPassword")
+		.notEmpty()
+		.withMessage("Password is required.")
+		.isLength({ min: 8 })
+		.withMessage("Password has to be more than 7 characters."),
 	handleExpressValidatorErrors,
 ];
 
 export {
 	registerValidateInput,
 	loginValidateInput,
+	sendResetPasswordValidateInput,
 	resetPasswordValidateInput,
 };
