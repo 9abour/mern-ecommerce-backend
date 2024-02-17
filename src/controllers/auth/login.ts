@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import { NextFunction, Request, Response } from "express";
 import UserModel from "../../models/user.model";
 import { IUser } from "../../types/user.types";
@@ -22,6 +21,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 		);
 	}
 
+	// Check Password
 	await checkUserPassword(password, user.password, () =>
 		handleSendResponse(
 			res,
