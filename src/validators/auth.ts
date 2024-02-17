@@ -23,4 +23,13 @@ const loginValidateInput = [
 	handleExpressValidatorErrors,
 ];
 
-export { registerValidateInput, loginValidateInput };
+const resetPasswordValidateInput = [
+	check("email").notEmpty().withMessage("Email is required."),
+	handleExpressValidatorErrors,
+];
+
+export {
+	registerValidateInput,
+	loginValidateInput,
+	resetPasswordValidateInput,
+};

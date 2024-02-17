@@ -29,6 +29,7 @@ const sendVerificationTokenMail = async (
 			201,
 			STATUS_TEXT.SUCCESSFUL
 		);
+
 		res.redirect("/login");
 	});
 };

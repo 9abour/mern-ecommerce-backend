@@ -11,33 +11,10 @@ import getUser from "./helpers/getUser";
 const login = async (req: Request, res: Response, next: NextFunction) => {
 	const { email, password } = req.body;
 
-	const user: IUser | null = await getUser(email);
-
-	// No User found
-	if (!user) {
-		return handleSendResponse(
-			res,
-			null,
-			["The user not exists!"],
-			404,
-			STATUS_TEXT.NOT_FOUND,
-			next
-		);
-	}
+	const user = await getUser(email, res, next);
 
 	// Check Password
-	await checkUserPassword(password, user.password, () =>
-		next(
-			handleSendResponse(
-				res,
-				null,
-				["The password do not match!"],
-				404,
-				STATUS_TEXT.NOT_FOUND,
-				next
-			)
-		)
-	);
+	await checkUserPassword(password, user.password, res, next);
 
 	const refreshToken = generateRefreshToken(user);
 	const accessToken = generateAccessToken(refreshToken);

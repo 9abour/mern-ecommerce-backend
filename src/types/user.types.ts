@@ -13,6 +13,7 @@ export type IUser = {
 	role: ROLES;
 	verificationToken?: string;
 	verified?: boolean;
+	resetPassword?: string;
 };
 
 export type INewUser = Pick<
