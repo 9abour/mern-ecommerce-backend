@@ -1,25 +1,19 @@
+import fs from "fs";
 import cheerio from "cheerio";
 
-const generateVerifyEmailTemplate = (
-	htmlContent: string,
-	verifyLink: string
-) => {
-	{
-		const $ = cheerio.load(htmlContent);
+const generateVerifyEmailTemplate = (verifyLink: string): string => {
+	const htmlContent: string = fs.readFileSync(
+		"./public/assets/verifyEmailTemplate.html",
+		"utf8"
+	);
 
-		const confirmLinkElement = $("#confirmLink");
+	const $ = cheerio.load(htmlContent);
 
-		if (confirmLinkElement.length === 0) {
-			console.error('Confirm link element with id "confirmLink" not found');
-			return;
-		}
+	const confirmLinkElement = $("#confirmLink");
 
-		confirmLinkElement.attr("href", verifyLink);
+	confirmLinkElement.attr("href", verifyLink);
 
-		const generatedVerifyEmailTemplate = $.html();
-
-		return generatedVerifyEmailTemplate;
-	}
+	return $.html();
 };
 
 export default generateVerifyEmailTemplate;

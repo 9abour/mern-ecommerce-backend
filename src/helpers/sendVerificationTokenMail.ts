@@ -4,6 +4,7 @@ import { STATUS_TEXT } from "../enums/statusTexts.enums";
 import saveUser from "../controllers/auth/helpers/saveUser";
 import { INewUser } from "../types/user.types";
 import sendMail from "./sendMail";
+import generateVerifyEmailTemplate from "./generateVerifyEmailTemplate";
 
 const sendVerificationTokenMail = async (
 	res: Response,
@@ -17,7 +18,7 @@ const sendVerificationTokenMail = async (
 		from: process.env.TRANSPORTER_EMAIL || "",
 		to: user.email,
 		subject: "Verify Your Email Address",
-		text: `Please click on the following link to verify your email address: ${verificationLink}`,
+		html: generateVerifyEmailTemplate(verificationLink),
 	};
 
 	sendMail(mailOptions, res, next, async () => {
