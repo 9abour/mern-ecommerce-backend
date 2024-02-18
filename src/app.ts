@@ -14,13 +14,13 @@ app.use(cors());
 app.use(router);
 
 connectToMongoDB().then(() => {
-  console.log("connected to the database");
+	console.log("connected to the database");
 });
 
 app.get("/", async (_, res: Response) => {
-  res.send("Hello, World!");
+	res.send("Hello, World!");
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on PORT -> ${PORT}`);
+	console.log(`Server running on PORT -> ${PORT}`);
 });

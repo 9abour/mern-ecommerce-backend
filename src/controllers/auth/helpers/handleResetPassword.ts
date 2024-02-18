@@ -2,8 +2,8 @@ import { NextFunction, Response } from "express";
 import handleSendResponse from "../../../helpers/handleSendResponse";
 import { IUser } from "../../../types/user.types";
 import { STATUS_TEXT } from "../../../enums/statusTexts.enums";
-import jwt from "jsonwebtoken";
 import ResetPasswordHelper from "./resetPassword.helper";
+import HandleTokenHelper from "./handleToken.helper";
 
 const handleResetPassword = (
 	user: IUser | null,
@@ -22,20 +22,12 @@ const handleResetPassword = (
 		);
 	}
 
-	const secretKey: string = process.env.JWT_SECRET_KEY || "";
-
-	jwt.verify(user.resetPassword, secretKey, error => {
-		if (error) {
-			return handleSendResponse(
-				res,
-				null,
-				["The password reset token is invalid!"],
-				404,
-				STATUS_TEXT.ERROR,
-				next
-			);
-		}
-	});
+	HandleTokenHelper.checkToken(
+		user.resetPassword,
+		"The password reset token is invalid!",
+		res,
+		next
+	);
 
 	ResetPasswordHelper.updatePassword(user.email, newPassword);
 };

@@ -37,9 +37,17 @@ const resetPasswordValidateInput = [
 	handleExpressValidatorErrors,
 ];
 
+const refreshTokenValidateAuth = [
+	check("authorization")
+		.exists()
+		.withMessage("There is no token provided in the request!"),
+	handleExpressValidatorErrors,
+];
+
 export {
 	registerValidateInput,
 	loginValidateInput,
 	sendResetPasswordValidateInput,
 	resetPasswordValidateInput,
+	refreshTokenValidateAuth,
 };
