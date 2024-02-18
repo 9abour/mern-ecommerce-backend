@@ -17,7 +17,7 @@ const sendResetPwd = async (
 
 	await userModel.updateOne({ email }, { resetPassword: token });
 
-	const verificationLink = `http://localhost:5000/reset/${token}`;
+	const verificationLink = `http://localhost:5000/resetPassword/${token}`;
 
 	const mailOptions: ISendMailOptions = {
 		from: process.env.TRANSPORTER_EMAIL || "",
