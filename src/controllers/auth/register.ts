@@ -1,13 +1,25 @@
 import { NextFunction, Request, Response } from "express";
 import { IUser } from "../../types/user.types";
-import getUser from "./helpers/getUser";
 import crypto from "crypto";
 import sendVerificationTokenMail from "../../helpers/sendVerificationTokenMail";
+import handleSendResponse from "../../helpers/handleSendResponse";
+import { STATUS_TEXT } from "../../enums/statusTexts.enums";
+import userModel from "../../models/user.model";
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
 	const { firstName, lastName, email, password }: IUser = req.body;
+	const user = await userModel.findOne({ email });
 
-	await getUser(email, res, next);
+	if (user) {
+		return handleSendResponse(
+			res,
+			null,
+			["The user already exists."],
+			409,
+			STATUS_TEXT.ERROR,
+			next
+		);
+	}
 
 	const verificationToken = crypto.randomBytes(20).toString("hex");
 
