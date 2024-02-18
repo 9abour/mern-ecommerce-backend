@@ -33,7 +33,7 @@ const sendResetPwd = async (
 	sendMail(mailOptions, res, next, () => {
 		handleSendResponse(
 			res,
-			{ msg: "Check your email box!" },
+			{ msg: "Check your email box, The token will expire after 5 minutes." },
 			null,
 			200,
 			STATUS_TEXT.SUCCESSFUL
