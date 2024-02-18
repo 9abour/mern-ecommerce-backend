@@ -3,7 +3,7 @@ import { IUser } from "./user.types";
 
 export type IPublicUser = Pick<
 	IUser,
-	| "id_"
+	| "_id"
 	| "firstName"
 	| "lastName"
 	| "email"

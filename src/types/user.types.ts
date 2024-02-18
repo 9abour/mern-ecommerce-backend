@@ -2,7 +2,7 @@ import { IProduct } from "./product.types";
 import { ROLES } from "../enums/roles.enums";
 
 export type IUser = {
-	id_?: string;
+	_id?: string;
 	firstName: string;
 	lastName: string;
 	email: string;

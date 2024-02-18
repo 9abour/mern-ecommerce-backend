@@ -13,7 +13,6 @@ import login from "../../controllers/auth/login";
 import sendResetPwd from "../../controllers/auth/sendResetPwd";
 import resetPassword from "../../controllers/auth/resetPassword";
 import refreshToken from "../../controllers/auth/refreshToken";
-import checkUser from "../../middlewares/checkUser";
 
 const authRoutes = Router();
 
@@ -32,7 +31,6 @@ authRoutes.patch(
 );
 authRoutes.get(
 	"/refreshToken",
-	checkUser,
 	refreshTokenValidateAuth,
 	asyncWrapper(refreshToken)
 );

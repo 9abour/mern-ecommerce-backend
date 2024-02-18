@@ -24,7 +24,7 @@ const refreshToken = async (
 			accessToken,
 		},
 		null,
-		201,
+		200,
 		STATUS_TEXT.SUCCESSFUL
 	);
 };

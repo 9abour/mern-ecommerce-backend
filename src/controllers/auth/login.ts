@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import UserModel from "../../models/user.model";
-import { IUser } from "../../types/user.types";
 import handleSendResponse from "../../helpers/handleSendResponse";
 import { STATUS_TEXT } from "../../enums/statusTexts.enums";
 import checkUserPassword from "./helpers/checkUserPassword";

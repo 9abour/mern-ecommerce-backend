@@ -16,17 +16,17 @@ class HandleTokenHelper {
 			expiresIn: "30m",
 		};
 
-		const decoded: any = jwt.verify(refreshToken, HandleTokenHelper.secretKey);
+		const user: any = jwt.verify(refreshToken, HandleTokenHelper.secretKey);
 
-		if (!decoded) {
+		if (!user) {
 			return null;
 		}
 
-		const { id_, firstName, lastName, email, image_url, wishlist, cart, role } =
-			decoded.user;
+		const { id, firstName, lastName, email, image_url, wishlist, cart, role } =
+			user;
 
 		const userPayload = {
-			id_,
+			id: id.toString(),
 			firstName,
 			lastName,
 			email,
@@ -42,11 +42,11 @@ class HandleTokenHelper {
 	};
 
 	public static generateRefreshToken = (user: IUser): string => {
-		const { id_, firstName, lastName, email, image_url, wishlist, cart, role } =
+		const { _id, firstName, lastName, email, image_url, wishlist, cart, role } =
 			user;
 
 		const userPayload = {
-			id_,
+			id: _id?.toString(),
 			firstName,
 			lastName,
 			email,
