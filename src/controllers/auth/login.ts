@@ -4,9 +4,8 @@ import { IUser } from "../../types/user.types";
 import handleSendResponse from "../../helpers/handleSendResponse";
 import { STATUS_TEXT } from "../../enums/statusTexts.enums";
 import checkUserPassword from "./helpers/checkUserPassword";
-import generateRefreshToken from "./helpers/generateRefreshToken";
-import generateAccessToken from "./helpers/generateAccessToken";
 import getUser from "./helpers/getUser";
+import HandleTokenHelper from "./helpers/handleToken.helper";
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
 	const { email, password } = req.body;
@@ -16,8 +15,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 	// Check Password
 	await checkUserPassword(password, user.password, res, next);
 
-	const refreshToken = generateRefreshToken(user);
-	const accessToken = generateAccessToken(refreshToken);
+	const refreshToken = HandleTokenHelper.generateRefreshToken(user);
+	const accessToken = HandleTokenHelper.generateAccessToken(refreshToken);
 
 	handleSendResponse(
 		res,
