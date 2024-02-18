@@ -3,8 +3,8 @@ import { ISendMailOptions } from "../../types/sendMail.types";
 import userModel from "../../models/user.model";
 import sendMail from "../../helpers/sendMail";
 import handleSendResponse from "../../helpers/handleSendResponse";
-import generateResetPasswordToken from "./helpers/generateResetPasswordToken";
 import { STATUS_TEXT } from "../../enums/statusTexts.enums";
+import ResetPasswordHelper from "./helpers/resetPassword.helper";
 
 const sendResetPwd = async (
 	req: Request,
@@ -13,7 +13,11 @@ const sendResetPwd = async (
 ) => {
 	const { email } = req.body;
 
-	const token = await generateResetPasswordToken(email, res, next);
+	const token = await ResetPasswordHelper.generateResetPasswordToken(
+		email,
+		res,
+		next
+	);
 
 	await userModel.updateOne({ email }, { resetPassword: token });
 

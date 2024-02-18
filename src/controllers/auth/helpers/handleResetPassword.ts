@@ -3,7 +3,7 @@ import handleSendResponse from "../../../helpers/handleSendResponse";
 import { IUser } from "../../../types/user.types";
 import { STATUS_TEXT } from "../../../enums/statusTexts.enums";
 import jwt from "jsonwebtoken";
-import updatePassword from "./updatePassword";
+import ResetPasswordHelper from "./resetPassword.helper";
 
 const handleResetPassword = (
 	user: IUser | null,
@@ -36,7 +36,7 @@ const handleResetPassword = (
 		);
 	}
 
-	updatePassword(user.email, newPassword);
+	ResetPasswordHelper.updatePassword(user.email, newPassword);
 };
 
 export default handleResetPassword;
