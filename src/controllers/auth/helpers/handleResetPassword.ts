@@ -24,17 +24,18 @@ const handleResetPassword = (
 
 	const secretKey: string = process.env.JWT_SECRET_KEY || "";
 
-	const decode = jwt.verify(user.resetPassword, secretKey);
-	if (!decode) {
-		return handleSendResponse(
-			res,
-			null,
-			["The password reset token is invalid!"],
-			404,
-			STATUS_TEXT.ERROR,
-			next
-		);
-	}
+	jwt.verify(user.resetPassword, secretKey, error => {
+		if (error) {
+			return handleSendResponse(
+				res,
+				null,
+				["The password reset token is invalid!"],
+				404,
+				STATUS_TEXT.ERROR,
+				next
+			);
+		}
+	});
 
 	ResetPasswordHelper.updatePassword(user.email, newPassword);
 };

@@ -6,8 +6,8 @@ import getUser from "./getUser";
 
 class ResetPasswordHelper {
 	public static updatePassword = (email: string, newPassword: string) => {
-		bcrypt.hash(newPassword, 10, (err, hashed) => {
-			userModel.updateOne({
+		bcrypt.hash(newPassword, 10, async (err, hashed) => {
+			await userModel.updateOne({
 				email: email,
 				$unset: { resetPassword: 1 },
 				$set: { password: hashed },
