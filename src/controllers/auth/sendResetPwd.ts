@@ -5,6 +5,7 @@ import sendMail from "../../helpers/sendMail";
 import handleSendResponse from "../../helpers/handleSendResponse";
 import { STATUS_TEXT } from "../../enums/statusTexts.enums";
 import ResetPasswordHelper from "./helpers/resetPassword.helper";
+import sendResetPasswordMail from "../../helpers/sendResetPasswordMail";
 
 const sendResetPwd = async (
 	req: Request,
@@ -21,24 +22,7 @@ const sendResetPwd = async (
 
 	await userModel.updateOne({ email }, { resetPassword: token });
 
-	const verificationLink = `http://localhost:5000/resetPassword/${token}`;
-
-	const mailOptions: ISendMailOptions = {
-		from: process.env.TRANSPORTER_EMAIL || "",
-		to: email,
-		subject: "Reset Your Account Password",
-		text: `Please click on the following link to reset your password: ${verificationLink}`,
-	};
-
-	sendMail(mailOptions, res, next, () => {
-		handleSendResponse(
-			res,
-			{ msg: "Check your email box, The token will expire after 5 minutes." },
-			null,
-			200,
-			STATUS_TEXT.SUCCESSFUL
-		);
-	});
+	sendResetPasswordMail(res, email, token, next);
 };
 
 export default sendResetPwd;

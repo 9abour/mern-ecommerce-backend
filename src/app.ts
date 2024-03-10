@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import router from "./routes";
 import cors from "cors";
 import { connectToMongoDB } from "./helpers/connectToMongoDB";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(router);
+app.use(cookieParser());
 
 connectToMongoDB().then(() => {
 	console.log("connected to the database");

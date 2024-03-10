@@ -71,7 +71,7 @@ class HandleTokenHelper {
 		res: Response,
 		next: NextFunction
 	) => {
-		jwt.verify(token, this.secretKey, error => {
+		jwt.verify(token, this.secretKey, (error, decoded) => {
 			if (error) {
 				return handleSendResponse(
 					res,
@@ -90,21 +90,27 @@ class HandleTokenHelper {
 		res: Response,
 		next: NextFunction
 	): IPublicUser | void => {
-		const decoded: any = jwt.verify(accessToken, this.secretKey);
+		const decoded: any = jwt.verify(
+			accessToken,
+			this.secretKey,
+			(error, decoded) => {
+				if (error) {
+					handleSendResponse(
+						res,
+						null,
+						["Invalid token"],
+						400,
+						STATUS_TEXT.ERROR,
+						next
+					);
+					return;
+				}
 
-		if (!decoded) {
-			handleSendResponse(
-				res,
-				null,
-				["Invalid token"],
-				400,
-				STATUS_TEXT.ERROR,
-				next
-			);
-			return;
-		}
+				return decoded;
+			}
+		);
 
-		return decoded.user;
+		return decoded;
 	};
 
 	public static getAuthToken = (req: Request): string | null => {

@@ -12,7 +12,7 @@ const sendVerificationTokenMail = async (
 	verificationToken: string,
 	next: NextFunction
 ) => {
-	const verificationLink = `http://localhost:5000/verify/${verificationToken}`;
+	const verificationLink = `https://localhost:3000/auth/verify/${verificationToken}`;
 
 	const mailOptions = {
 		from: process.env.TRANSPORTER_EMAIL || "",
@@ -30,8 +30,6 @@ const sendVerificationTokenMail = async (
 			201,
 			STATUS_TEXT.SUCCESSFUL
 		);
-
-		res.redirect("/login");
 	});
 };
 
