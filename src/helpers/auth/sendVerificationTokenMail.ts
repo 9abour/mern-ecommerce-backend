@@ -1,9 +1,9 @@
 import { NextFunction, Response } from "express";
-import handleSendResponse from "./handleSendResponse";
-import { STATUS_TEXT } from "../enums/statusTexts.enums";
-import saveUser from "../controllers/auth/helpers/saveUser";
-import { INewUser } from "../types/user.types";
-import sendMail from "./sendMail";
+import handleSendResponse from "../handleSendResponse";
+import { STATUS_TEXT } from "../../enums/statusTexts.enums";
+import saveUser from "../../controllers/auth/helpers/saveUser";
+import { INewUser } from "../../types/user.types";
+import sendMail from "../sendMail";
 import generateVerifyEmailTemplate from "./generateVerifyEmailTemplate";
 
 const sendVerificationTokenMail = async (

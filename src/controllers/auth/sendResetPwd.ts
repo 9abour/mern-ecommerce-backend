@@ -1,11 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { ISendMailOptions } from "../../types/sendMail.types";
 import userModel from "../../models/user.model";
-import sendMail from "../../helpers/sendMail";
-import handleSendResponse from "../../helpers/handleSendResponse";
-import { STATUS_TEXT } from "../../enums/statusTexts.enums";
 import ResetPasswordHelper from "./helpers/resetPassword.helper";
-import sendResetPasswordMail from "../../helpers/sendResetPasswordMail";
+import sendResetPasswordMail from "../../helpers/auth/sendResetPasswordMail";
 
 const sendResetPwd = async (
 	req: Request,

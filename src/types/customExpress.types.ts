@@ -7,12 +7,12 @@ export type IPublicUser = Pick<
 	| "firstName"
 	| "lastName"
 	| "email"
-	| "image_url"
+	| "imageUrl"
 	| "cart"
 	| "wishlist"
 	| "role"
 >;
 
-export interface IPrivateRequest extends Request {
+export interface PrivateRequestType extends Request {
 	user?: IPublicUser;
 }

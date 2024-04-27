@@ -1,4 +1,4 @@
-import { IProduct } from "./product.types";
+import { ProductType } from "./product.types";
 import { ROLES } from "../enums/roles.enums";
 
 export type IUser = {
@@ -6,10 +6,10 @@ export type IUser = {
 	firstName: string;
 	lastName: string;
 	email: string;
-	image_url: string;
+	imageUrl: string;
 	password: string;
-	wishlist: IProduct[];
-	cart: IProduct[];
+	wishlist: ProductType[];
+	cart: ProductType[];
 	role: ROLES;
 	verificationToken?: string;
 	verified?: boolean;

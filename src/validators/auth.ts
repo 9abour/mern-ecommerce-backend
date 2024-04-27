@@ -1,5 +1,5 @@
 import { check } from "express-validator";
-import handleExpressValidatorErrors from "../helpers/handleExpressValidatorError";
+import handleExpressValidatorErrors from "../helpers/express/handleExpressValidatorError";
 
 const registerValidateInput = [
 	check("firstName").notEmpty().withMessage("First Name is required."),

@@ -22,7 +22,7 @@ class HandleTokenHelper {
 			return null;
 		}
 
-		const { id, firstName, lastName, email, image_url, wishlist, cart, role } =
+		const { id, firstName, lastName, email, imageUrl, wishlist, cart, role } =
 			user;
 
 		const userPayload = {
@@ -30,7 +30,7 @@ class HandleTokenHelper {
 			firstName,
 			lastName,
 			email,
-			image_url,
+			imageUrl,
 			wishlist,
 			cart,
 			role,
@@ -42,7 +42,7 @@ class HandleTokenHelper {
 	};
 
 	public static generateRefreshToken = (user: IUser): string => {
-		const { _id, firstName, lastName, email, image_url, wishlist, cart, role } =
+		const { _id, firstName, lastName, email, imageUrl, wishlist, cart, role } =
 			user;
 
 		const userPayload = {
@@ -50,7 +50,7 @@ class HandleTokenHelper {
 			firstName,
 			lastName,
 			email,
-			image_url,
+			imageUrl,
 			wishlist,
 			cart,
 			role,

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import handleSendResponse from "./handleSendResponse";
-import { STATUS_TEXT } from "../enums/statusTexts.enums";
+import handleSendResponse from "../handleSendResponse";
+import { STATUS_TEXT } from "../../enums/statusTexts.enums";
 import getExpressValidatorErrors from "./getExpressValidatorErrors";
 
 /**
@@ -12,17 +12,17 @@ import getExpressValidatorErrors from "./getExpressValidatorErrors";
  */
 
 const handleExpressValidatorErrors = (
-  req: Request,
-  res: Response,
-  next: NextFunction,
+	req: Request,
+	res: Response,
+	next: NextFunction
 ) => {
-  const errors: string[] | null = getExpressValidatorErrors(req);
+	const errors: string[] | null = getExpressValidatorErrors(req);
 
-  if (errors) {
-    return handleSendResponse(res, null, errors, 400, STATUS_TEXT.ERROR);
-  }
+	if (errors) {
+		return handleSendResponse(res, null, errors, 400, STATUS_TEXT.ERROR);
+	}
 
-  next();
+	next();
 };
 
 export default handleExpressValidatorErrors;

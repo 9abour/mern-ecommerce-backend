@@ -1,8 +1,8 @@
 import { NextFunction, Response } from "express";
-import handleSendResponse from "./handleSendResponse";
-import { STATUS_TEXT } from "../enums/statusTexts.enums";
-import sendMail from "./sendMail";
-import { ISendMailOptions } from "../types/sendMail.types";
+import handleSendResponse from "../handleSendResponse";
+import { STATUS_TEXT } from "../../enums/statusTexts.enums";
+import sendMail from "../sendMail";
+import { ISendMailOptions } from "../../types/sendMail.types";
 import generateResetPasswordTemplate from "./generateResetPasswordTemplate";
 
 const sendResetPasswordMail = async (

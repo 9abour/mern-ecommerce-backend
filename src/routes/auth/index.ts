@@ -31,7 +31,7 @@ authRoutes.patch(
 	resetPasswordValidateInput,
 	asyncWrapper(resetPassword)
 );
-authRoutes.get(
+authRoutes.post(
 	"/refreshToken",
 	refreshTokenValidateAuth,
 	asyncWrapper(refreshToken)

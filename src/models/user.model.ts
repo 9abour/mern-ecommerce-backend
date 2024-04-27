@@ -6,7 +6,7 @@ const UserModel = new Schema<IUser>({
 	firstName: String,
 	lastName: String,
 	email: String,
-	image_url: {
+	imageUrl: {
 		type: String,
 		default: "",
 	},

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { IUser } from "../../types/user.types";
 import crypto from "crypto";
-import sendVerificationTokenMail from "../../helpers/sendVerificationTokenMail";
+import sendVerificationTokenMail from "../../helpers/auth/sendVerificationTokenMail";
 import handleSendResponse from "../../helpers/handleSendResponse";
 import { STATUS_TEXT } from "../../enums/statusTexts.enums";
 import userModel from "../../models/user.model";
