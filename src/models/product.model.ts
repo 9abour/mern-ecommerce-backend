@@ -13,6 +13,10 @@ const productSchema = new Schema<ProductType>({
 		default: 0,
 		type: Number,
 	},
+	discount: {
+		default: 0,
+		type: Number,
+	},
 });
 
 export default model<ProductType>("Product", productSchema);

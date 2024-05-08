@@ -7,4 +7,5 @@ export type ProductType = {
 	categories: string[];
 	in_stock: number;
 	rate: number;
+	discount: number;
 };

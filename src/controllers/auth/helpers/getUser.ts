@@ -25,9 +25,9 @@ const getUser = async (
 	if (!user.verified) {
 		return handleSendResponse(
 			res,
-			{ msg: "You need to verify the account first." },
 			null,
-			200,
+			["You need to verify the account first."],
+			401,
 			STATUS_TEXT.SUCCESSFUL
 		);
 	}
