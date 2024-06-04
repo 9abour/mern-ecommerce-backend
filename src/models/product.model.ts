@@ -8,7 +8,10 @@ const productSchema = new Schema<ProductType>({
 	description: String,
 	imageUrl: String,
 	categories: [String],
-	in_stock: Number,
+	count: {
+		type: Number,
+		default: 0,
+	},
 	rate: {
 		default: 0,
 		type: Number,

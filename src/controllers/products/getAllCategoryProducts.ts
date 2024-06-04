@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import productModel from "../../models/product.model";
-import categoryModel from "../../models/category.model";
 import handleSendResponse from "../../helpers/handleSendResponse";
 import { STATUS_TEXT } from "../../enums/statusTexts.enums";
+import { getCategoryId } from "../../helpers/category/getCategoryId";
 
 const getAllCategoryProducts = async (
 	req: Request,
@@ -11,9 +11,9 @@ const getAllCategoryProducts = async (
 ) => {
 	const { category } = req.params;
 
-	const categoryData = await categoryModel.findOne({ slug: category });
+	const categoryId = await getCategoryId(category);
 
-	if (!categoryData) {
+	if (!categoryId) {
 		return handleSendResponse(
 			res,
 			null,
@@ -23,8 +23,6 @@ const getAllCategoryProducts = async (
 			next
 		);
 	}
-
-	const categoryId = categoryData._id.toString();
 
 	const products = await productModel.find({
 		categories: categoryId,

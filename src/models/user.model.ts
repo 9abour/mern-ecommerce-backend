@@ -11,11 +11,11 @@ const UserModel = new Schema<IUser>({
 		default: "",
 	},
 	cart: {
-		type: [],
+		type: [String],
 		default: [],
 	},
 	wishlist: {
-		type: [],
+		type: [String],
 		default: [],
 	},
 	role: {
